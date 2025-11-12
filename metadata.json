@@ -1,0 +1,7 @@
+{
+  "name": "AI Interview Assessment Platform",
+  "description": "An intelligent interview assessment platform that combines a text-based practice mode with a voice-based mock interview agent. Features include resume/JD analysis, personalized question generation, real-time voice assessment, and detailed performance reports.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
