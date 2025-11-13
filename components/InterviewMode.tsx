@@ -18,6 +18,9 @@ type InterviewType = 'Technical' | 'Behavioral' | 'Mixed';
 type InterviewDuration = 5 | 15 | 30;
 type InterviewState = 'setup' | 'running' | 'generatingReport' | 'finished';
 
+// FIX: Initialize the AI client once and use the required environment variable.
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+
 const InterviewMode: React.FC<InterviewModeProps> = ({ onBack }) => {
     const [roleContext, setRoleContext] = useState('');
     const [resumeText, setResumeText] = useState('');
@@ -86,7 +89,6 @@ const InterviewMode: React.FC<InterviewModeProps> = ({ onBack }) => {
                 ${(resumeText || jobDescription) && roleContext ? `The context for this interview is the "${roleContext}" role.` : ''}
                 Start with a simple, brief introduction like "Hello, thanks for coming in today," and then immediately ask the first question. Do not introduce yourself with a name. Keep your questions and responses concise. Wait for the user to respond before asking the next question. When you feel the interview has reached its natural conclusion or is near the end of the ${interviewDuration} minute duration, conclude the session by saying "Thank you, this concludes our interview." Do not ask if the candidate has questions for you. Do not reveal that you are an AI.`;
 
-            const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
             const chat = ai.chats.create({
               model: 'gemini-2.5-flash',
               config: { systemInstruction }

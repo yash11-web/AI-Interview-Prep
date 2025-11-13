@@ -9,6 +9,9 @@ interface PracticeModeProps {
   onBack: () => void;
 }
 
+// FIX: Initialize the AI client once and use the required environment variable.
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+
 const PracticeMode: React.FC<PracticeModeProps> = ({ onBack }) => {
     const [topic, setTopic] = useState('');
     const [question, setQuestion] = useState('');
@@ -17,8 +20,6 @@ const PracticeMode: React.FC<PracticeModeProps> = ({ onBack }) => {
     const [error, setError] = useState<string | null>(null);
     const { isListening, transcript, startListening, stopListening, setTranscript } = useSpeechRecognition();
     
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
-
     const getNewQuestion = async () => {
         if (!topic) {
             setError('Please enter a topic.');

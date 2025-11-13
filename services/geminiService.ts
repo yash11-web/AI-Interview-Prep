@@ -1,7 +1,8 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { QuizQuestion, Roadmap, AtsScanResult, InterviewTurn, InterviewReport } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
+// FIX: Use process.env.API_KEY as per guidelines.
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const model = 'gemini-2.5-flash';
 
